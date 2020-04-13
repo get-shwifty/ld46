@@ -2,7 +2,7 @@
 
 Before ludum starts, this project is used as a sandbox for learning Phaser 3.
 
-## Dev flow
+## Dev flow
 
 | Command | Description |
 |---------|-------------|
