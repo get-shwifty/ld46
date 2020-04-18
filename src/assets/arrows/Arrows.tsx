@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.2" tiledversion="1.3.4" name="Arrows2" tilewidth="2400" tileheight="2400" tilecount="5" columns="0">
+<tileset version="1.2" tiledversion="1.3.4" name="Arrows2" tilewidth="200" tileheight="200" tilecount="4" columns="0">
+ <editorsettings>
+  <export target="Arrows.json" format="json"/>
+ </editorsettings>
  <grid orientation="orthogonal" width="1" height="1"/>
- <tile id="0">
-  <image width="1600" height="1600" source="arrow-down.png"/>
+ <tile id="6">
+  <image width="200" height="200" source="arrow-left.png"/>
  </tile>
- <tile id="1">
-  <image width="2400" height="2400" source="arrow-left.png"/>
+ <tile id="7">
+  <image width="200" height="200" source="arrow-right.png"/>
  </tile>
- <tile id="2">
-  <image width="634" height="256" source="arrow-right.png"/>
+ <tile id="8">
+  <image width="200" height="200" source="arrow-up.png"/>
  </tile>
- <tile id="3">
-  <image width="1600" height="1600" source="arrow-up.png"/>
- </tile>
- <tile id="4">
-  <image width="1062" height="579" source="strong-arrow-right.png"/>
+ <tile id="10">
+  <image width="200" height="200" source="arrow-down.png"/>
  </tile>
 </tileset>
