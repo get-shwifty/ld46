@@ -1,5 +1,7 @@
 import Phaser from 'phaser';
 
+import AbstractObject from './abstractObject'
+
 export const LifeStates = {
     FULL: 'full',
     MIDDLE: 'middle',
@@ -7,9 +9,9 @@ export const LifeStates = {
     DEAD: 'dead'
 }
 
-export default class Ground extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, sprite, children) {
-        super(scene, x, y, children);
+export default class Ground extends AbstractObject {
+    constructor(scene, sprite) {
+        super(scene);
         scene.add.existing(this);
 
         this.sprite = sprite;
@@ -34,7 +36,7 @@ export default class Ground extends Phaser.GameObjects.Container {
         if (scale) {
             const rnd = Phaser.Math.RND;
             const randFloat = rnd.realInRange(0.7, 1.3);
-            console.log(deco)
+            // console.log(deco)
             deco.scale = randFloat
         }
 
