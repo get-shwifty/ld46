@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 import { preload as preloadAssets } from './assets';
 
-import Hole from './hole';
+import Hole from './objects/hole';
 
 const config = {
   type: Phaser.AUTO,
@@ -16,7 +16,6 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-// let map;
 
 function preload() {
   preloadAssets.call(this);
