@@ -17,16 +17,21 @@ import cloud_6 from './assets/clouds/cloud_6.png';
 
 import water from './assets/particules/water.png'
 
+import lighthouse from './assets/deco/light_house.png'
+import boat from './assets/deco/boat.png'
+
 export function preload() {
     this.load.image('hole_0_green', hole_0_green);
     this.load.image('hole_1_green', hole_1_green);
     this.load.image('hole_2_green', hole_2_green);
     this.load.image('hole_3_green', hole_3_green);
 
-    this.load_image('ground_green', ground_green);
-    this.load_image('ground_left_green', ground_left_green);
+    this.load.image('ground_green', ground_green);
+    this.load.image('ground_left_green', ground_left_green);
 
-    this.load_image('sea', sea)
+    this.load.image('sea', sea)
+    this.load.image('lighthouse', lighthouse)
+    this.load.image('boat', boat)
 
     this.load.image('cloud_1', cloud_1);
     this.load.image('cloud_2', cloud_2);

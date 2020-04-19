@@ -20,9 +20,14 @@ export default class Ground extends Phaser.GameObjects.Container {
             life: 20
         });
         this.on('changedata-life', this.updateVue, this);
+        this.decorationsSprites = []
+        this.decorations = [];
     }
 
-    _addDecoration(decoration) {
+    _addDecoration(decoration, x, y = -30) {
+        let deco = new Phaser.GameObjects.Image(this.scene, x, y, decoration);
+        this.add(deco);
+        this.decorations.push(deco)
         // add the specified decoration at the top of the field and save it as child
         // how to do ? 
     }

@@ -6,12 +6,12 @@ export default class Sea extends Ground {
      */
     constructor(scene, x, y, children) {
         super(scene, x, y, 'sea', children)
-        this.decorations = ['boat']
-        this._add_decoration()
+        this.decorationsSprites = ['boat']
+        this._addDecorations()
     }
 
-    _add_decoration() {
-        // add les decorations
+    _addDecorations() {
+        this._addDecoration('boat', 0, -20)
     }
 
     set life(value) {

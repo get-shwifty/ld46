@@ -18,13 +18,12 @@ export class LeftField extends Ground {
      * The first tile after the sea, only for decoration purpose
      */
     constructor(scene, x, y, children) {
-        super(scene, x, y, 'ground_green_left', children)
-        this.decorations = ['lighthouse']
-        this._add_decoration()
+        super(scene, x, y, 'ground_left_green', children)
+        this._addDecorations()
     }
 
-    _add_decoration() {
-        // add le phare
+    _addDecorations() {
+        this._addDecoration('lighthouse', -25)
     }
 
     set life(value) {
