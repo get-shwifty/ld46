@@ -1,11 +1,14 @@
 import Phaser from 'phaser';
-import arrows from './assets/arrows/Arrows.json';
+
+import { preload as preloadAssets } from './assets';
+
+import Hole from './hole';
 
 const config = {
   type: Phaser.AUTO,
   parent: 'phaser-example',
-  width: 1200,
-  height: 600,
+  width: 5000,
+  height: 2000,
   scene: {
     preload: preload,
     create: create
@@ -13,32 +16,20 @@ const config = {
 };
 
 const game = new Phaser.Game(config);
-var controls;
-var marker;
-var map;
+// let map;
 
 function preload() {
-  this.load.image('arrows', arrows);
+  preloadAssets.call(this);
 }
 
 function create() {
+  this.cameras.main.setBackgroundColor('#ffffff');
+  this.cameras.main.setBounds(0, 0, 4000, 1000);
 
-  map = this.make.tilemap({ tileWidth: 250, tileHeight: 200, width: 10, height: 4});
-  
-  var arrows = map.addTilesetImage('arrows');
-
-  var layer = map.createDynamicLayer('wind', arrows);
-
-  layer.randomize(0, 0, 10, 4, [6, 7, 8, 10]);
-
-  this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
-
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: 'Power2',
-    yoyo: true,
-    loop: -1
-  });
+  const hole = new Hole(this, 400, 500);
+  setInterval(() => {
+    hole.setData({
+      water: Math.floor(Math.random() * 101)
+    });
+  }, 500);
 }
