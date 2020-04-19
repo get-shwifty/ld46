@@ -24,20 +24,37 @@ export default class Ground extends Phaser.GameObjects.Container {
         this.decorations = [];
     }
 
-    _addDecoration(decoration, x, y = -30) {
-        let deco = new Phaser.GameObjects.Image(this.scene, x, y, decoration);
+    _addDecoration(decoration, x, y, scale = false) {
+        if (y === undefined) {
+            y = 10
+        }
+        let deco = new Phaser.GameObjects.Sprite(this.scene, x, y, decoration);
+        const realY = y - deco.displayHeight / 2
+        deco.setY(realY);
+        if (scale) {
+            const rnd = Phaser.Math.RND;
+            const randFloat = rnd.realInRange(0.7, 1.3);
+            console.log(deco)
+            deco.scale = randFloat
+        }
+
+        deco.scaleX *= Phaser.Math.Between(0, 1) === 0 ? 1 : -1
         this.add(deco);
-        this.decorations.push(deco)
-        // add the specified decoration at the top of the field and save it as child
-        // how to do ? 
+        this.decorations.push(deco);
     }
 
     _addDecorations() {
         // reimplement in child classes
     }
 
+    _updateDecorations() {
+        // for(let deco of this.decorations){
+        //     deco.setAl
+        // }
+    }
+
     updateVue() {
-        this._addDecoration()
+        this._updateDecorations()
     }
 
     set life(newValue) {

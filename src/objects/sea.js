@@ -11,7 +11,7 @@ export default class Sea extends Ground {
     }
 
     _addDecorations() {
-        this._addDecoration('boat', 0, -20)
+        this._addDecoration('boat', 0, 20)
     }
 
     set life(value) {

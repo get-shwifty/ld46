@@ -19,6 +19,8 @@ import water from './assets/particules/water.png'
 
 import lighthouse from './assets/deco/light_house.png'
 import boat from './assets/deco/boat.png'
+import sheep from './assets/deco/sheep.png'
+import tree from './assets/deco/tree.png'
 
 export function preload() {
     this.load.image('hole_0_green', hole_0_green);
@@ -32,6 +34,8 @@ export function preload() {
     this.load.image('sea', sea)
     this.load.image('lighthouse', lighthouse)
     this.load.image('boat', boat)
+    this.load.image('sheep', sheep)
+    this.load.image('tree', tree)
 
     this.load.image('cloud_1', cloud_1);
     this.load.image('cloud_2', cloud_2);

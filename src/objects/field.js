@@ -5,11 +5,17 @@ export class Field extends Ground {
     constructor(scene, x, y, children) {
         // TODO: rajouter du random pour la couleur du field ? 
         super(scene, x, y, 'ground_green', children)
-        this.decorations = ['sheeps']
+        this.decorationsSprites = ['sheep', 'tree']
+        this._addDecorations()
     }
 
-    _add_decoration() {
-        // ajouter moutons 
+    _addDecorations() {
+        for (let i = 0; i < 21; i += 3) {
+            let elem = this.decorationsSprites[Math.floor(Math.random() * this.decorationsSprites.length)];
+            console.log(elem)
+            console.log(i * 10 - 100)
+            this._addDecoration(elem, i * 10 - 100, undefined, true)
+        }
     }
 }
 

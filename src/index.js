@@ -26,8 +26,9 @@ function preload() {
 }
 
 function create() {
-    this.cameras.main.setBackgroundColor('#ffffff');
+    this.cameras.main.setBackgroundColor('#8DBFE0');
     this.cameras.main.setBounds(0, 0, 4000, 1000);
+    this.cameras.main.setZoom(0.75);
 
     const s = new Sea(this, 150, 350)
     const f = new LeftField(this, 350, 350);
