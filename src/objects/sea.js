@@ -1,6 +1,6 @@
-import Ground from './ground'
+import { Ground } from './ground'
 
-export default class Sea extends Ground {
+export class Sea extends Ground {
     /**
      * The sea tile, only for decoration purpose
      */

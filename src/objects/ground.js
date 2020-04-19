@@ -6,13 +6,26 @@ export const LifeStates = {
     LOW: 'low',
     DEAD: 'dead'
 }
+// dict of tuples ([sprite] | sprite, [decorations])
+// can be used to generate easily new biomes with default behaviours
+export const GroundTypes = {
+    FOREST: ['ground_green', ['tree']],
+    CITY: ['ground_green', ['tree', 'sheep', 'paysan', 'paysanne', 'house', 'house', 'house_tall', 'windmill', 'church']],
+    FIELD: ['ground_green', ['sheep', 'tree', 'sheep', 'paysan', 'paysanne', 'sheep', 'tree']]
+}
 
-export default class Ground extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, sprite, children) {
+export class Ground extends Phaser.GameObjects.Container {
+    constructor(scene, x, y, sprite, decorations = [], density = 1, children) {
         super(scene, x, y, children);
         scene.add.existing(this);
 
-        this.sprite = sprite;
+        // handle multiple grounds sprites
+        if (Array.isArray(sprite)) {
+            this.sprite = sprite[Phaser.Math.Between(0, sprite.length - 1)]
+        }
+        else {
+            this.sprite = sprite;
+        }
         this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, this.sprite);
         this.add(this.image);
 
@@ -20,8 +33,19 @@ export default class Ground extends Phaser.GameObjects.Container {
             life: 20
         });
         this.on('changedata-life', this.updateVue, this);
-        this.decorationsSprites = []
+
+        this.decorationsSprites = decorations
         this.decorations = [];
+        // density of decorations
+        this.density = 5 - density
+        this._addDecorations()
+    }
+
+    _addDecorations() {
+        for (let i = 0; i < 21; i += this.density) {
+            let elem = this.decorationsSprites[Math.floor(Math.random() * this.decorationsSprites.length)];
+            this._addDecoration(elem, i * 10 - 100, undefined, true)
+        }
     }
 
     _addDecoration(decoration, x, y, scale = false) {
@@ -30,11 +54,12 @@ export default class Ground extends Phaser.GameObjects.Container {
         }
         let deco = new Phaser.GameObjects.Sprite(this.scene, x, y, decoration);
         const realY = y - deco.displayHeight / 2
+        const realX = x + deco.displayWidth / 2
         deco.setY(realY);
+        deco.setX(realX)
         if (scale) {
             const rnd = Phaser.Math.RND;
             const randFloat = rnd.realInRange(0.7, 1.3);
-            console.log(deco)
             deco.scale = randFloat
         }
 
@@ -43,14 +68,19 @@ export default class Ground extends Phaser.GameObjects.Container {
         this.decorations.push(deco);
     }
 
-    _addDecorations() {
-        // reimplement in child classes
-    }
-
     _updateDecorations() {
-        // for(let deco of this.decorations){
-        //     deco.setAl
-        // }
+        let temp = this.decorations.slice()
+        const nbToDisplay = Math.round(temp.length - this.life / this.density)
+        for (let i = 0; i < nbToDisplay; i++) {
+            // take a random sprite and set alpha to 100
+            let randIndex = Phaser.Math.Between(0, temp.length - 1)
+            temp[randIndex].setAlpha(100)
+            temp = temp.filter((_, index) => index !== randIndex)
+        }
+        // should only remain the one we want to make disappear
+        for (let deco of temp) {
+            deco.setAlpha(0)
+        }
     }
 
     updateVue() {
@@ -58,7 +88,7 @@ export default class Ground extends Phaser.GameObjects.Container {
     }
 
     set life(newValue) {
-        if (life >= 0 && life <= 20) {
+        if (newValue >= 0 && newValue <= 20) {
             this.setData({
                 life: newValue
             })
@@ -66,6 +96,7 @@ export default class Ground extends Phaser.GameObjects.Container {
         else {
             throw new Error('Life must be between 0 and 20')
         }
+        console.log("life changed, new value: " + newValue)
     }
 
     get life() {
