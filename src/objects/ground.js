@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { MAX_LIFE } from '../constants/constants';
 
 export const LifeStates = {
     FULL: 'full',
@@ -38,11 +39,14 @@ export class Ground extends Phaser.GameObjects.Container {
         this.decorations = [];
         // density of decorations
         this.density = 5 - density
-        this._addDecorations()
+
+        if (this.decorationsSprites.length > 0) {
+            this._addDecorations()
+        }
     }
 
     _addDecorations() {
-        for (let i = 0; i < 21; i += this.density) {
+        for (let i = 0; i < MAX_LIFE; i += this.density) {
             let elem = this.decorationsSprites[Math.floor(Math.random() * this.decorationsSprites.length)];
             this._addDecoration(elem, i * 10 - 100, undefined, true)
         }
@@ -69,17 +73,30 @@ export class Ground extends Phaser.GameObjects.Container {
     }
 
     _updateDecorations() {
-        let temp = this.decorations.slice()
-        const nbToDisplay = Math.round(temp.length - this.life / this.density)
-        for (let i = 0; i < nbToDisplay; i++) {
+        let displayed = this.decorations.filter(e => e.alpha === 1)
+        let hidden = this.decorations.filter(e => e.alpha === 0)
+        const nbToDisplay = Math.round(this.life / this.density)
+        const nbToHide = displayed.length - nbToDisplay
+        console.log("Current life: " + this.life, "Current displayed: " + displayed.length, "Current hidden: " + hidden.length)
+        console.log(`Should have displayed: ${Math.round(this.life / this.density)}`, `Should have hidden: ${nbToHide}`)
+        // if need to display more
+        while (displayed.length < nbToDisplay) {
+            console.log("we're about to display!")
             // take a random sprite and set alpha to 100
-            let randIndex = Phaser.Math.Between(0, temp.length - 1)
-            temp[randIndex].setAlpha(100)
-            temp = temp.filter((_, index) => index !== randIndex)
+            let randIndex = Phaser.Math.Between(0, hidden.length - 1)
+            // console.log(hidden, randIndex)
+            hidden[randIndex].setAlpha(1)
+            displayed = this.decorations.filter(e => e.alpha === 1)
+            hidden = this.decorations.filter(e => e.alpha === 0)
         }
-        // should only remain the one we want to make disappear
-        for (let deco of temp) {
-            deco.setAlpha(0)
+        // if need to display less
+        for (let i = 0; i < nbToHide; i++) {
+            console.log(`we're about to hide! currently hiddens: ${hidden.length}, we should hide: ${nbToHide}`)
+            // take a random sprite and set alpha to 100
+            let randIndex = Phaser.Math.Between(0, displayed.length - 1)
+            displayed[randIndex].setAlpha(0)
+            displayed = this.decorations.filter(e => e.alpha === 1)
+            hidden = this.decorations.filter(e => e.alpha === 0)
         }
     }
 
