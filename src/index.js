@@ -21,11 +21,18 @@ let world;
 
 function preload() {
     preloadAssets.call(this);
+
+    this.load.audio('music', [
+        './assets/audio/music/music.ogg',
+    ]);
 }
 
 function create() {
     this.cameras.main.setBackgroundColor('#fbc05d');
     this.cameras.main.setZoom(1.0);
+
+    var music_player = this.sound.add('music');
+    music_player.play();
     
     world = new World(this, 10, 5);
     const { x, y } = world.getSizeInPixels()
