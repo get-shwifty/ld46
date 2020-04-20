@@ -4,8 +4,8 @@ export class Sea extends Ground {
     /**
      * The sea tile, only for decoration purpose
      */
-    constructor(scene, x, y, children) {
-        super(scene, x, y, 'sea', children)
+    constructor(scene) {
+        super(scene, 'sea')
         this.decorationsSprites = ['boat']
         this._addDecorations()
     }

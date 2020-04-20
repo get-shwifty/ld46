@@ -2,9 +2,9 @@ import { Ground, GroundTypes } from './ground'
 import { LifeStates } from './ground'
 
 export class Field extends Ground {
-    constructor(scene, x, y, children) {
+    constructor(scene) {
         // TODO: rajouter du random pour la couleur du field ? 
-        super(scene, x, y, 'ground_green', children)
+        super(scene, 'ground_green')
         this.decorationsSprites = ['sheep', 'tree', 'sheep', 'paysan', 'paysanne', 'sheep', 'tree']
         this._addDecorations()
     }
@@ -14,8 +14,8 @@ export class LeftField extends Ground {
     /**
      * The first tile after the sea, only for decoration purpose
      */
-    constructor(scene, x, y, children) {
-        super(scene, x, y, 'ground_left_green', children)
+    constructor(scene) {
+        super(scene, 'ground_left_green')
         this._addDecorations()
     }
 

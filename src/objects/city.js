@@ -1,12 +1,11 @@
-import { Ground } from './ground'
 import Phaser from 'phaser';
 
-import { LifeStates } from './ground'
+import { Ground, LifeStates } from './ground'
 
 export class City extends Ground {
-    constructor(scene, x, y, children) {
+    constructor(scene) {
         // TODO: rajouter du random pour la couleur du field ? 
-        super(scene, x, y, 'ground_green', children)
+        super(scene, 'ground_green')
         this.decorationsSprites = ['tree', 'sheep', 'paysan', 'paysanne', 'house', 'house', 'house_tall', 'windmill', 'church']
         this._addDecorations()
     }

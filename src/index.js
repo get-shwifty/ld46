@@ -2,19 +2,13 @@ import Phaser from 'phaser';
 
 import { preload as preloadAssets } from './assets';
 
-import Hole from './objects/hole';
-
-import Cloud from './objects/cloud';
-import { Field, LeftField } from './objects/field'
-import { Ground, GroundTypes } from './objects/ground'
-import { Sea } from './objects/sea';
-import { City } from './objects/city'
+import World from './world';
 
 const config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 2000,
-    height: 500,
+    height: 1000,
     scene: {
         preload: preload,
         create: create

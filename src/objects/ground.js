@@ -1,6 +1,8 @@
 import Phaser from 'phaser';
 import { MAX_LIFE } from '../constants/constants';
 
+import AbstractObject from './abstractObject'
+
 export const LifeStates = {
     FULL: 'full',
     MIDDLE: 'middle',
@@ -15,9 +17,9 @@ export const GroundTypes = {
     FIELD: ['ground_green', ['sheep', 'tree', 'sheep', 'paysan', 'paysanne', 'sheep', 'tree']]
 }
 
-export class Ground extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, sprite, decorations = [], density = 1, children) {
-        super(scene, x, y, children);
+export class Ground extends AbstractObject {
+    constructor(scene, sprite, decorations = [], density = 1) {
+        super(scene);
         scene.add.existing(this);
 
         // handle multiple grounds sprites

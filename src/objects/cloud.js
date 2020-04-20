@@ -1,10 +1,12 @@
-import Phaser from 'phaser';
+import Phaser from 'phaser'
 
-export default class Cloud extends Phaser.GameObjects.Container {
+import AbstractObject from './abstractObject'
 
-	constructor(scene, x, y){
+export default class Cloud extends AbstractObject {
 
-		super(scene, x, y);
+	constructor(scene){
+
+		super(scene);
 		scene.add.existing(this);
 		
 		this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, 'cloud');
@@ -18,14 +20,14 @@ export default class Cloud extends Phaser.GameObjects.Container {
 
 		const particles = scene.add.particles('water');
 		this.emitter = particles.createEmitter({
-			//x: { min: 200, max: 600 }, //Permet de faire tomber les gouttes sur une ligne horizontale
+			// x: { min: 200, max: 600 }, //Permet de faire tomber les gouttes sur une ligne horizontale
 			//y: 0,
 			angle: { min: 60, max: 120 }, 
 			speed: { min: 100, max: 300 },
 			frequency: 200,
-			lifespan: 8000,
+			lifespan: 5000,
 			quantity: 2,
-			scale: { start: 0.1, end: 0 }
+			scale: { start: 1, end: 0 }
 		});
 
 		this.emitter.startFollow(this);

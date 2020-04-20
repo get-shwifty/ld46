@@ -1,8 +1,10 @@
 import Phaser from 'phaser';
 
-export default class Hole extends Phaser.GameObjects.Container {
-    constructor(scene, x, y, children) {
-        super(scene, x, y, children);
+import AbstractObject from './abstractObject'
+
+export default class Hole extends AbstractObject {
+    constructor(scene) {
+        super(scene);
         scene.add.existing(this);
 
         this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, 'hole_0_green');
