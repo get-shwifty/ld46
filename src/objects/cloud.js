@@ -5,9 +5,7 @@ import AbstractObject from './abstractObject'
 export default class Cloud extends AbstractObject {
 
 	constructor(scene){
-
 		super(scene);
-		scene.add.existing(this);
 		
 		this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, 'cloud');
 		this.add(this.image);

@@ -10,23 +10,29 @@ const config = {
     width: 2000,
     height: 1000,
     scene: {
-        preload: preload,
-        create: create
+        preload,
+        create,
+        update
     }
 };
 
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
+let world;
 
 function preload() {
     preloadAssets.call(this);
 }
 
 function create() {
-    this.cameras.main.setBackgroundColor('#8DBFE0');
+    this.cameras.main.setBackgroundColor('#fbc05d');
     this.cameras.main.setZoom(1.0);
     
-    this.world = new World(this, 10, 5);
-    const { x, y } = this.world.getSizeInPixels()
+    world = new World(this, 10, 5);
+    const { x, y } = world.getSizeInPixels()
     this.cameras.main.setBounds(0, 0, x, y);
 
+}
+
+function update(time, delta) {
+    world.update(time, delta)
 }

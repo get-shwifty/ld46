@@ -32,6 +32,8 @@ import house_tall from './assets/deco/house_tall.png'
 import house_large from './assets/deco/house_large.png'
 import windmill from './assets/deco/windmill.png'
 
+import arrow_weak from './assets/grounds/arrow_weak.png'
+
 export function preload() {
     this.load.image('hole_0_green', hole_0_green);
     this.load.image('hole_1_green', hole_1_green);
@@ -64,4 +66,6 @@ export function preload() {
     this.load.image('cloud_6', cloud_6);
 
     this.load.image('water', water);
+
+    this.load.image('arrow_weak', arrow_weak);
 }
