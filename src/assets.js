@@ -34,7 +34,12 @@ import windmill from './assets/deco/windmill.png'
 
 import arrow_weak from './assets/grounds/arrow_weak.png'
 
+import music from './assets/audio/music/music.ogg'
+
 export function preload() {
+
+    // Image
+
     this.load.image('hole_0_green', hole_0_green);
     this.load.image('hole_1_green', hole_1_green);
     this.load.image('hole_2_green', hole_2_green);
@@ -68,4 +73,8 @@ export function preload() {
     this.load.image('water', water);
 
     this.load.image('arrow_weak', arrow_weak);
+
+    // Audio
+
+    this.load.audio('music', music);
 }

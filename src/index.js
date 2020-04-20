@@ -21,17 +21,21 @@ let world;
 
 function preload() {
     preloadAssets.call(this);
-
-    this.load.audio('music', [
-        './assets/audio/music/music.ogg',
-    ]);
 }
 
 function create() {
     this.cameras.main.setBackgroundColor('#fbc05d');
     this.cameras.main.setZoom(1.0);
 
-    var music_player = this.sound.add('music');
+    var music_player = this.sound.add('music', {
+        mute: false,
+        volume: 1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+    });
     music_player.play();
     
     world = new World(this, 10, 5);
