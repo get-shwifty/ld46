@@ -20,7 +20,6 @@ export const GroundTypes = {
 export class Ground extends AbstractObject {
     constructor(scene, sprite, decorations = [], density = 1) {
         super(scene);
-        scene.add.existing(this);
 
         // handle multiple grounds sprites
         if (Array.isArray(sprite)) {

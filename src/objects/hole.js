@@ -5,7 +5,6 @@ import AbstractObject from './abstractObject'
 export default class Hole extends AbstractObject {
     constructor(scene) {
         super(scene);
-        scene.add.existing(this);
 
         this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, 'hole_0_green');
         this.add(this.image);
