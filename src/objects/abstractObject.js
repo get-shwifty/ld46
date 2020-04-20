@@ -2,10 +2,16 @@ import Phaser from 'phaser';
 
 export default class AbstractObject extends Phaser.GameObjects.Container {
 
-    constructor(scene, height=1) {
+    constructor(scene, alt = 1) {
         super(scene);
         scene.add.existing(this);
 
-        this.height = height;
+        this.setData({
+            alt: alt
+        })
+    }
+
+    get alt() {
+        return this.getData('alt')
     }
 }
