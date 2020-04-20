@@ -1,6 +1,8 @@
 
-import Sea from './objects/sea'
 import { Field, LeftField } from './objects/field'
+import { Ground, GroundTypes } from './objects/ground'
+import { Sea } from './objects/sea';
+import { City } from './objects/city'
 
 const TILE_W = 200
 const TILE_H = 200
@@ -11,14 +13,17 @@ class Environment {
     constructor(scene, width) {
         this.scene = scene
 
-        this.data = [];
-
-        // Create first world
-        this.data.push(new Sea(scene))
-        this.data.push(new LeftField(scene))
-        for(let i = 2; i < width; i++) {
-            this.data.push(new Field(scene))
-        }
+        this.data = [
+            // Create first world
+            new Sea(this.scene),
+            new LeftField(this.scene),
+            new Field(this.scene),
+            new City(this.scene),
+            new Ground(this.scene, GroundTypes.FOREST[0], GroundTypes.FOREST[1], 3),
+            new Field(this.scene),
+            new City(this.scene),
+            new City(this.scene),
+        ];
     }
 }
 
@@ -43,9 +48,7 @@ export default class World {
 
     updateAllPos() {
         this.environment.data.forEach((obj, i) => {
-            console.log(i, obj.height - 1)
             const pos = this.tileToWorld(i, obj.height - 1)
-            console.log(pos)
             obj.setPosition(pos.x, pos.y)
         })
     }

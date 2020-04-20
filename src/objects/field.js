@@ -1,21 +1,12 @@
-import Ground from './ground'
+import { Ground, GroundTypes } from './ground'
 import { LifeStates } from './ground'
 
 export class Field extends Ground {
     constructor(scene) {
         // TODO: rajouter du random pour la couleur du field ? 
         super(scene, 'ground_green')
-        this.decorationsSprites = ['sheep', 'tree']
+        this.decorationsSprites = ['sheep', 'tree', 'sheep', 'paysan', 'paysanne', 'sheep', 'tree']
         this._addDecorations()
-    }
-
-    _addDecorations() {
-        for (let i = 0; i < 21; i += 3) {
-            let elem = this.decorationsSprites[Math.floor(Math.random() * this.decorationsSprites.length)];
-            // console.log(elem)
-            // console.log(i * 10 - 100)
-            this._addDecoration(elem, i * 10 - 100, undefined, true)
-        }
     }
 }
 
@@ -35,5 +26,14 @@ export class LeftField extends Ground {
     set life(value) {
         // cannot change the life of this one
         return
+    }
+}
+
+export class Forest extends Ground {
+    constructor(scene, x, y, children) {
+        // TODO: rajouter du random pour la couleur du field ? 
+        super(scene, x, y, 'ground_green', children)
+        this.decorationsSprites = ['tree']
+        this._addDecorations()
     }
 }
