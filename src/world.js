@@ -11,11 +11,10 @@ const OFF_W = 100
 const OFF_H = 100
 
 export default class World {
-    constructor(scene, width=10, height=5) {
+    constructor(scene, width = 10, height = 5) {
         this.scene = scene
         this.width = width
         this.height = height
-    
         // Create first world
         this.environment = [
             new Sea(this.scene),
@@ -28,7 +27,7 @@ export default class World {
             new City(this.scene),
         ]
         this._createWindGrid()
-        
+
         this.updateAllPos()
     }
 
@@ -46,12 +45,12 @@ export default class World {
 
     updateAllPos() {
         this.environment.forEach((obj, i) => {
-            const pos = this.tileToWorld(i, obj.height - 1)
+            const pos = this.tileToWorld(i, obj.alt - 1)
             obj.setPosition(pos.x, pos.y)
         })
         this.windGrid.forEach((col, i) => {
             col.forEach((wind, j) => {
-                if(wind) {
+                if (wind) {
                     const pos = this.tileToWorld(i, j + 1)
                     wind.setPosition(pos.x, pos.y)
                 }
@@ -63,9 +62,9 @@ export default class World {
         this.windGrid = []
         this.environment.forEach((obj, i) => {
             const col = []
-            
-            for(let i = 1; i < this.height; i++) {
-                if (i < obj.height) {
+
+            for (let i = 1; i < this.height; i++) {
+                if (i < obj.alt) {
                     col.push(null)
                 } else {
                     col.push(new Wind(this.scene))
@@ -86,15 +85,14 @@ export default class World {
         return this.windGrid[pos.x][pos.y - 1]
     }
 
-    update (time, delta)
-    {
+    update(time, delta) {
         // controls.update(delta);
 
         var worldPoint = this.scene.input.activePointer.positionToCamera(this.scene.cameras.main);
         var pointer = this.worldToTile(worldPoint.x, worldPoint.y);
-        
+
         if (this.scene.input.manager.activePointer.isDown) {
-            if(this.currentPointerTile) {
+            if (this.currentPointerTile) {
                 const diff = pointer.clone().subtract(this.currentPointerTile);
                 const newDir = WIND_X_Y_TO_DIR[diff.x] && WIND_X_Y_TO_DIR[diff.x][diff.y]
                 if (newDir !== undefined) {
