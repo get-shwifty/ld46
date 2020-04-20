@@ -7,9 +7,9 @@ export default class Cloud extends AbstractObject {
 	constructor(scene) {
 		super(scene);
 
-		this.image = new Phaser.GameObjects.Image(this.scene, 0, 0, 'cloud');
+		this.image = new Phaser.GameObjects.Sprite(this.scene, 0, 0, 'cloud_1');
 		this.add(this.image);
-
+		this.setDepth(5)
 		this.setData({
 			size: 1
 		});
@@ -18,25 +18,28 @@ export default class Cloud extends AbstractObject {
 
 		const particles = scene.add.particles('water');
 		this.emitter = particles.createEmitter({
-			// x: { min: 200, max: 600 }, //Permet de faire tomber les gouttes sur une ligne horizontale
+			x: { min: this.x - this.image.displayWidth / 2 + 40, max: this.x - this.image.displayWidth / 2 + 140 }, //Permet de faire tomber les gouttes sur une ligne horizontale
 			//y: 0,
-			angle: { min: 60, max: 120 },
+			angle: { min: 90, max: 90 },
 			speed: { min: 100, max: 300 },
-			frequency: 200,
+			frequency: 100,
 			lifespan: 5000,
-			quantity: 2,
-			scale: { start: 1, end: 0 }
+			quantity: 1,
+			scale: { start: 1, end: 0.5 }
 		});
+		particles.setDepth(1)
 
 		this.emitter.startFollow(this);
 		this.stopRaining();
 		this.thunderSprites = []
 		for (let index in [1, 2, 3]) {
 			let thunder = new Phaser.GameObjects.Sprite(this.scene, 0, 0, 'thunder_' + index);
-			const realY = y - thunder.displayHeight / 2
+			const realY = 0 + thunder.displayHeight / 2
 			thunder.setY(realY);
 			thunder.setAlpha(0)
+			thunder.setDepth(1)
 			this.add(thunder)
+			this.sendToBack(thunder)
 			this.thunderSprites.push(thunder)
 		}
 	}

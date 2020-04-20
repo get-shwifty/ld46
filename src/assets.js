@@ -23,7 +23,7 @@ import thunder_2 from './assets/clouds/orage_2.png';
 import thunder_3 from './assets/clouds/orage_3.png';
 
 
-import water from './assets/particules/water.png'
+import water from './assets/particules/goute.png'
 
 import lighthouse from './assets/deco/light_house.png'
 import boat from './assets/deco/boat.png'

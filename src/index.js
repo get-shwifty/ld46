@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 
 import { preload as preloadAssets } from './assets';
-
+import Cloud from './objects/cloud'
 import World from './world';
 
 const config = {
@@ -24,7 +24,7 @@ function preload() {
 }
 
 function create() {
-    this.cameras.main.setBackgroundColor('#fbc05d');
+    this.cameras.main.setBackgroundColor('#8DBFE0');
     this.cameras.main.setZoom(1.0);
 
     var music_player = this.sound.add('music', {
@@ -37,11 +37,13 @@ function create() {
         delay: 0
     });
     music_player.play();
-    
+
     world = new World(this, 10, 5);
     const { x, y } = world.getSizeInPixels()
     this.cameras.main.setBounds(0, 0, x, y);
-
+    const cloud = new Cloud(this)
+    cloud.setPosition(200, 200)
+    setInterval(() => cloud.size = cloud.size + 1, 2000)
     // this.cameras.main.setBackgroundColor('#8DBFE0');
     // this.cameras.main.setBounds(0, 0, 4000, 1000);
     // this.cameras.main.setZoom(0.75);
