@@ -11,6 +11,7 @@ import ground_greener from './assets/grounds/ground_greener.png'
 import ground_left_greener from './assets/grounds/ground_left_greener.png';
 
 import sea from './assets/grounds/sea.png';
+import sea_top from './assets/deco/sea_top.png'
 
 import cloud_1 from './assets/clouds/cloud_1.png';
 import cloud_2 from './assets/clouds/cloud_2.png';
@@ -57,6 +58,7 @@ export function preload() {
     this.load.image('ground_left_greener', ground_left_greener);
 
     this.load.image('sea', sea)
+    this.load.image('sea_top', sea_top)
     this.load.image('lighthouse', lighthouse)
     this.load.image('boat', boat)
     this.load.image('sheep', sheep)
