@@ -24,8 +24,8 @@ function preload() {
 }
 
 function create() {
-    this.cameras.main.setBackgroundColor('#fbc05d');
-    this.cameras.main.setZoom(1.0);
+    this.cameras.main.setBackgroundColor('#fbc05d')
+    this.cameras.main.setZoom(1.0)
 
     var music_player = this.sound.add('music', {
         mute: false,

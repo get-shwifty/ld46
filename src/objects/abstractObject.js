@@ -6,6 +6,8 @@ export default class AbstractObject extends Phaser.GameObjects.Container {
         super(scene);
         scene.add.existing(this);
 
+        this.setDepth(1)
+
         this.height = height;
     }
 }

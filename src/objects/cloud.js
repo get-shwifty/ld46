@@ -2,7 +2,7 @@ import Phaser from 'phaser'
 
 import AbstractObject from './abstractObject'
 
-export default class Cloud extends AbstractObject {
+export class Cloud extends AbstractObject {
 
 	constructor(scene){
 		super(scene);
@@ -16,8 +16,8 @@ export default class Cloud extends AbstractObject {
 
 		this.on('changedata-size', this.onSizeChange, this);
 
-		const particles = scene.add.particles('water');
-		this.emitter = particles.createEmitter({
+		this.particles = scene.add.particles('water');
+		this.emitter = this.particles.createEmitter({
 			// x: { min: 200, max: 600 }, //Permet de faire tomber les gouttes sur une ligne horizontale
 			//y: 0,
 			angle: { min: 60, max: 120 }, 
@@ -25,21 +25,31 @@ export default class Cloud extends AbstractObject {
 			frequency: 200,
 			lifespan: 5000,
 			quantity: 2,
-			scale: { start: 1, end: 0 }
+			scale: { start: 0.1, end: 0 }
 		});
 
 		this.emitter.startFollow(this);
-		this.stopRaining();
+		this.stopRaining()
+		this.updateVue()
 	}
 
-	updateVue(size) { 
-		this.image.setTexture(`cloud_${size}`);
+	destroy(fromScene) {
+		super.destroy(fromScene)
+		this.stopRaining()
+
+		setTimeout(() => {
+			this.particles.destroy()
+		}, 5000)
+	}
+
+	updateVue() { 
+		this.image.setTexture(`cloud_${this.getData('size')}`);
 	}
 
 	onSizeChange(){
-		console.log("oh my size changed!")
+		// console.log("oh my size changed!")
 		const size = this.getData('size');
-		this.updateVue(size);
+		this.updateVue();
 
 		if(size >= 3){
 			this.startRaining();
@@ -56,9 +66,14 @@ export default class Cloud extends AbstractObject {
 		this.emitter.stop();
 	}
 
+	get size(){
+		return this.getData('size')
+	}
+
 	set size(newValue){
-		console.log("NewValue: " + newValue)
-		if(newValue > 0 && newValue <= 6){
+		// console.log("NewValue: " + newValue)
+		newValue = Math.min(Math.max(newValue, 0), 6)
+		if(this.size !== newValue){
 			this.setData({
 				size: newValue
 			});
