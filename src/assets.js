@@ -11,14 +11,20 @@ import ground_greener from './assets/grounds/ground_greener.png'
 import ground_left_greener from './assets/grounds/ground_left_greener.png';
 
 import sea from './assets/grounds/sea.png';
+import sea_top from './assets/deco/sea_top.png'
+
 import cloud_1 from './assets/clouds/cloud_1.png';
 import cloud_2 from './assets/clouds/cloud_2.png';
 import cloud_3 from './assets/clouds/cloud_3.png';
 import cloud_4 from './assets/clouds/cloud_4.png';
 import cloud_5 from './assets/clouds/cloud_5.png';
 import cloud_6 from './assets/clouds/cloud_6.png';
+import thunder_1 from './assets/clouds/orage_1.png';
+import thunder_2 from './assets/clouds/orage_2.png';
+import thunder_3 from './assets/clouds/orage_3.png';
 
-import water from './assets/particules/water.png'
+
+import water from './assets/particules/goute.png'
 
 import lighthouse from './assets/deco/light_house.png'
 import boat from './assets/deco/boat.png'
@@ -33,6 +39,7 @@ import house_large from './assets/deco/house_large.png'
 import windmill from './assets/deco/windmill.png'
 
 import arrow_weak from './assets/grounds/arrow_weak.png'
+
 
 import music from './assets/audio/music/music.ogg'
 
@@ -51,6 +58,7 @@ export function preload() {
     this.load.image('ground_left_greener', ground_left_greener);
 
     this.load.image('sea', sea)
+    this.load.image('sea_top', sea_top)
     this.load.image('lighthouse', lighthouse)
     this.load.image('boat', boat)
     this.load.image('sheep', sheep)
@@ -69,6 +77,9 @@ export function preload() {
     this.load.image('cloud_4', cloud_4);
     this.load.image('cloud_5', cloud_5);
     this.load.image('cloud_6', cloud_6);
+    this.load.image('thunder_1', thunder_1);
+    this.load.image('thunder_2', thunder_2);
+    this.load.image('thunder_3', thunder_3);
 
     this.load.image('water', water);
 

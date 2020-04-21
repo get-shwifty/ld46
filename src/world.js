@@ -12,11 +12,10 @@ const OFF_W = 100
 const OFF_H = 100
 
 export default class World {
-    constructor(scene, width=10, height=5) {
+    constructor(scene, width = 10, height = 5) {
         this.scene = scene
         this.width = width
         this.height = height
-    
         // Create first world
         this.environment = [
             new Sea(this.scene),
@@ -48,7 +47,7 @@ export default class World {
 
     updateAllPos() {
         this.environment.forEach((obj, x) => {
-            const pos = this.tileToWorld(x, obj.height - 1)
+            const pos = this.tileToWorld(x, obj.alt - 1)
             obj.setPosition(pos.x, pos.y)
         })
         this.windGrid.forEach((col, x) => {
@@ -69,7 +68,7 @@ export default class World {
             const clouds = []
             
             for(let i = 0; i < this.height; i++) {
-                if (i < obj.height) {
+                if (i < obj.alt) {
                     col.push(null)
                 } else {
                     col.push(new Wind(this.scene))
@@ -113,19 +112,19 @@ export default class World {
         if (cloud) {
             const pos = this.tileToWorld(x, y)
             cloud.setPosition(pos.x, pos.y)
+            cloud.alt = y
         }
         return cloud
     }
 
-    update (time, delta)
-    {
+    update(time, delta) {
         // controls.update(delta);
 
         var worldPoint = this.scene.input.activePointer.positionToCamera(this.scene.cameras.main);
         var pointer = this.worldToTile(worldPoint.x, worldPoint.y);
-        
+
         if (this.scene.input.manager.activePointer.isDown) {
-            if(this.currentPointerTile) {
+            if (this.currentPointerTile) {
                 const diff = pointer.clone().subtract(this.currentPointerTile);
                 const newDir = WIND_X_Y_TO_DIR[diff.x] && WIND_X_Y_TO_DIR[diff.x][diff.y]
                 if (newDir !== undefined) {
